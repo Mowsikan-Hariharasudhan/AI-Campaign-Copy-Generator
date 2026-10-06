@@ -1,3 +1,5 @@
+const logger = require('./logger');
+
 /**
  * Robust JSON extraction and schema validation for AI generated responses
  */
@@ -10,26 +12,67 @@ function extractJSON(text) {
   let clean = text.trim();
 
   // Strip Markdown code fences if present (```json ... ``` or ``` ...)
-  if (clean.startsWith('```')) {
-    clean = clean.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim();
-  }
+  clean = clean.replace(/```(?:json)?([\s\S]*?)```/gi, '$1').trim();
 
-  // Attempt standard parse first
+  // 1. Direct parse attempt
   try {
     return JSON.parse(clean);
-  } catch (err) {
-    // If there is preamble or postscript commentary, locate outermost JSON braces
+  } catch (initialErr) {
+    // 2. Scan for balanced JSON object { ... }
     const firstBrace = clean.indexOf('{');
-    const lastBrace = clean.lastIndexOf('}');
-    if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
-      const candidate = clean.substring(firstBrace, lastBrace + 1);
-      try {
-        return JSON.parse(candidate);
-      } catch (innerErr) {
-        throw new Error(`Failed to parse extracted JSON candidate: ${innerErr.message}`);
+    if (firstBrace !== -1) {
+      // Find the matching closing brace considering nesting
+      let depth = 0;
+      let lastMatchIndex = -1;
+
+      for (let i = firstBrace; i < clean.length; i++) {
+        if (clean[i] === '{') {
+          depth++;
+        } else if (clean[i] === '}') {
+          depth--;
+          if (depth === 0) {
+            lastMatchIndex = i;
+            break;
+          }
+        }
+      }
+
+      // If balanced closing brace found, parse that substring
+      if (lastMatchIndex !== -1) {
+        const candidate = clean.substring(firstBrace, lastMatchIndex + 1);
+        try {
+          return JSON.parse(candidate);
+        } catch (innerErr) {
+          logger.warn(`Failed parsing balanced candidate JSON: ${innerErr.message}`);
+        }
+      }
+
+      // Fallback: outermost lastIndexOf('}')
+      const lastBrace = clean.lastIndexOf('}');
+      if (lastBrace > firstBrace) {
+        const candidate = clean.substring(firstBrace, lastBrace + 1);
+        try {
+          return JSON.parse(candidate);
+        } catch (innerErr2) {
+          logger.warn(`Failed parsing outermost candidate JSON: ${innerErr2.message}`);
+        }
       }
     }
-    throw new Error(`Could not find valid JSON structure in AI output: ${err.message}`);
+
+    // 3. Scan for balanced JSON array [ ... ]
+    const firstBracket = clean.indexOf('[');
+    const lastBracket = clean.lastIndexOf(']');
+    if (firstBracket !== -1 && lastBracket > firstBracket) {
+      const candidate = clean.substring(firstBracket, lastBracket + 1);
+      try {
+        return JSON.parse(candidate);
+      } catch (innerErr3) {
+        logger.warn(`Failed parsing array candidate JSON: ${innerErr3.message}`);
+      }
+    }
+
+    logger.error('Raw unparsable model response:', { rawSnippet: text.substring(0, 300) });
+    throw new Error(`Could not parse JSON from AI response: ${initialErr.message}`);
   }
 }
 

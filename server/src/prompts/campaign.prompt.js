@@ -16,7 +16,7 @@ GROUNDING & QUALITY RULES:
 6. Adapt writing style accurately to the requested TONE OF VOICE without repeating the tone name as a gimmick.
 7. Include clear, channel-appropriate calls-to-action (CTA).
 8. Never state or hint that you are an AI assistant.
-9. Return ONLY a valid JSON object matching the requested schema. No conversational preambles, no markdown code fence blocks.`;
+9. Return ONLY a valid JSON object matching the requested schema. Output must begin directly with '{' and end with '}'. Do not include preambles, notes, commentary, safety disclosures, or markdown code fences.`;
 
 /**
  * Builds the prompt for generating the full campaign

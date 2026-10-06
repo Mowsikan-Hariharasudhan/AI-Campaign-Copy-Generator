@@ -77,4 +77,14 @@ console.log('--- Running Server Unit Tests ---');
   console.log('✓ Test 5: Regeneration request validation passed.');
 }
 
+// Test 6: JSON Extraction with provider preamble (e.g., "User Safety: safe\n\n{...}")
+{
+  const withPreamble = 'User Safety: safe\n\n{\n  "emailSubjects": ["S1", "S2", "S3", "S4", "S5"],\n  "emailPreviews": ["P1", "P2", "P3"],\n  "promotionalEmail": { "subject": "Sub", "body": "Body" },\n  "whatsappMessage": "WA msg",\n  "smsMessage": "SMS msg"\n}';
+  const extracted = extractJSON(withPreamble);
+  assert.strictEqual(extracted.emailSubjects.length, 5);
+  const validated = validateCampaignOutput(extracted);
+  assert.strictEqual(validated.smsMessage, 'SMS msg');
+  console.log('✓ Test 6: Extracted JSON with provider safety/system preamble.');
+}
+
 console.log('All backend unit tests passed successfully!\n');
