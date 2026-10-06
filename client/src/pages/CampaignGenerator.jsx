@@ -17,7 +17,7 @@ export function CampaignGenerator() {
     apiError,
     handleInputChange,
     handleToneSelect,
-    handleLoadSample,
+    handleLoadPreset,
     handleReset,
     handleGenerate,
     handleRegenerateSection
@@ -35,7 +35,7 @@ export function CampaignGenerator() {
               onChange={handleInputChange}
               onToneSelect={handleToneSelect}
               onSubmit={handleGenerate}
-              onLoadSample={handleLoadSample}
+              onLoadPreset={handleLoadPreset}
               onReset={handleReset}
               isLoading={isLoading}
             />

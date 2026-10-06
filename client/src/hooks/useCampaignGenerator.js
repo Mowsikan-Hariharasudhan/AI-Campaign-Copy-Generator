@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import { generateCampaignApi, regenerateSectionApi } from '../services/campaignApi';
 import { validateCampaignForm } from '../utils/validation';
 import { SAMPLE_DATA } from '../constants/tones';
+import { fireConfetti } from '../utils/confetti';
 
 const INITIAL_FORM = {
   productName: '',
@@ -42,8 +43,8 @@ export function useCampaignGenerator() {
     });
   }, []);
 
-  const handleLoadSample = useCallback(() => {
-    setFormData({ ...SAMPLE_DATA });
+  const handleLoadPreset = useCallback((presetData) => {
+    setFormData({ ...presetData });
     setErrors({});
     setApiError(null);
   }, []);
@@ -72,6 +73,7 @@ export function useCampaignGenerator() {
       const data = await generateCampaignApi(formData);
       setGeneratedOutput(data);
       setErrors({});
+      fireConfetti();
     } catch (err) {
       console.error('Error generating campaign:', err);
       setApiError(err.message || 'Failed to generate campaign. Please check your network and API key.');
@@ -120,7 +122,7 @@ export function useCampaignGenerator() {
     apiError,
     handleInputChange,
     handleToneSelect,
-    handleLoadSample,
+    handleLoadPreset,
     handleReset,
     handleGenerate,
     handleRegenerateSection
