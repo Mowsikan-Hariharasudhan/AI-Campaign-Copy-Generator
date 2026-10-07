@@ -33,6 +33,18 @@
   </tr>
 </table>
 
+## Live Demo
+
+The application is deployed and running here:
+
+- Frontend: https://ai-campaign-copy-generator-2uuz1bml1.vercel.app/
+- Backend API: https://ai-campaign-copy-generator-2.onrender.com
+
+- <p align="center">
+  <a href="https://ai-campaign-copy-generator-2uuz1bml1.vercel.app/">
+    <img src="https://img.shields.io/badge/Live-Demo-22C55E?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" />
+  </a>
+</p>
 ## Overview
 
 CampaignAI Studio is a full-stack marketing assistant that takes a product brief and produces high-converting campaign content tailored for multiple channels. The frontend captures campaign details, the backend validates and prepares the request, and an AI model generates structured outputs ready for direct use.
