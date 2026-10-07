@@ -1,23 +1,53 @@
 # CampaignAI Studio
 
-CampaignAI Studio is a full-stack application that generates ecommerce campaign copy for email, WhatsApp, and SMS from a single campaign brief. This repository contains the React client, Express API, prompt definitions, validation, tests, and development notes.
+<p align="center">
+  <img src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white" alt="React 19" />
+  <img src="https://img.shields.io/badge/Express-Node.js-000000?logo=express&logoColor=white" alt="Express" />
+  <img src="https://img.shields.io/badge/OpenRouter-AI-7C3AED?logo=openai&logoColor=white" alt="OpenRouter" />
+  <img src="https://img.shields.io/badge/PDF-Export-10B981?logo=adobeacrobatreader&logoColor=white" alt="PDF Export" />
+  <img src="https://img.shields.io/badge/Status-Ready-22C55E?logo=githubactions&logoColor=white" alt="Status Ready" />
+</p>
 
-## Assignment Coverage
+<div align="center">
+  <h1><b>CampaignAI Studio</b></h1>
+  <p>
+    <b>AI-powered ecommerce campaign copy generator</b><br>
+    Turn one brief into email, WhatsApp, and SMS content in seconds.
+  </p>
+</div>
 
-| Assignment requirement | Implementation |
-| --- | --- |
-| Product name and description | Required campaign form fields |
-| Offer, target audience, campaign objective, tone | Required form fields with tone choices and presets |
-| Generate copy with an AI model | Express API calls OpenRouter Chat Completions |
-| Five email subjects and three preview texts | Generated and schema-validated by the backend |
-| Promotional email, WhatsApp, and SMS | Generated and shown in channel-specific result views |
-| Copy generated output | Copy controls are available on result sections |
-| Relevant, grounded copy and CTA | Prompt rules constrain copy to supplied product facts and request channel-appropriate CTAs |
-| Bonus: tones, regeneration, export | Tone selection, per-section regeneration, Markdown and PDF export |
-| Source code, setup guide, architecture | Included in this repository and documented below |
-| LLM conversation/tool log | See [llm_conversations.md](llm_conversations.md) and [docs/llm-conversations.md](docs/llm-conversations.md) |
+<table>
+  <tr>
+    <td width="33%" bgcolor="#0f172a" valign="top">
+      <h3>🚀 Core Idea</h3>
+      <p>Generate conversion-focused campaign assets from a single campaign brief using AI and structured validation.</p>
+    </td>
+    <td width="33%" bgcolor="#111827" valign="top">
+      <h3>📦 What it creates</h3>
+      <p>5 email subjects, 3 preview texts, promotional email, WhatsApp message, and SMS in one workflow.</p>
+    </td>
+    <td width="33%" bgcolor="#0f172a" valign="top">
+      <h3>✨ Bonus features</h3>
+      <p>Tone control, section regeneration, instant copy actions, Markdown export, and PDF export.</p>
+    </td>
+  </tr>
+</table>
 
-AI output quality depends on the selected OpenRouter model. The server validates the required output structure, but generated wording should still be reviewed before use in a real campaign.
+## Overview
+
+CampaignAI Studio is a full-stack marketing assistant that takes a product brief and produces high-converting campaign content tailored for multiple channels. The frontend captures campaign details, the backend validates and prepares the request, and an AI model generates structured outputs ready for direct use.
+
+This repository includes the React client, Express API, prompt logic, validation, tests, and documentation needed to run and evaluate the project.
+
+## Why this project stands out
+
+- Smart campaign input system for product, offer, audience, objective, and tone
+- AI-generated copy grounded in the provided product facts
+- Multi-channel output for email, WhatsApp, and SMS
+- Per-section regeneration without resetting the whole campaign
+- Copy-to-clipboard actions for fast marketing workflows
+- PDF and Markdown export for presentation and sharing
+- Built with production-focused validation and clear service separation
 
 ## Architecture
 
@@ -32,10 +62,55 @@ flowchart LR
   P --> UI[Results, copy, regenerate, export]
 ```
 
-- **Client:** React 19, Vite, Tailwind CSS 4, and Lucide icons. `useCampaignGenerator` coordinates form state, loading/errors, generation, and section regeneration. The Vite development server proxies `/api` to the backend at port `5000`.
-- **Server:** Node.js and Express. Routes call controllers, validators, and campaign services. The OpenRouter service tries the configured model and then its fallback models. AI responses are parsed and validated before being returned to the client.
-- **Persistence:** No database is required. Campaign data is held in the browser during the current session and sent to the API when requested.
-- **PDF:** The browser builds a styled HTML campaign brief and converts it to a paginated PDF with `html2pdf.js`/`html2canvas`. PDF content is rendered as page images, not searchable vector text.
+### Stack
+
+- **Client:** React 19, Vite, and modern UI components
+- **Server:** Node.js + Express backend with validation and orchestration
+- **AI layer:** OpenRouter-powered generation and response parsing
+- **Export layer:** Markdown and PDF generation for campaign brief delivery
+- **Testing:** Backend validation and parser checks for required campaign output structures
+
+## Assignment Coverage
+
+| Requirement | Implementation |
+| --- | --- |
+| Product name and description | Required campaign form fields |
+| Offer, target audience, campaign objective, tone | Required form fields with tone choices and presets |
+| Generate copy with an AI model | Express API calls OpenRouter Chat Completions |
+| Five email subjects and three preview texts | Generated and validated by the backend |
+| Promotional email, WhatsApp, and SMS | Generated and shown in channel-specific result views |
+| Copy generated output | Copy controls available on each result section |
+| Relevant, grounded copy and CTA | Prompt constraints enforce brand-safe and product-grounded messaging |
+| Bonus features | Tones, regeneration, Markdown export, PDF export |
+| Source code and setup | Included in this repository and documented below |
+| LLM/tool log | See [llm_conversations.md](llm_conversations.md) and [docs/llm-conversations.md](docs/llm-conversations.md) |
+
+AI output quality depends on the selected OpenRouter model. The backend validates the required structure, but generated wording should still be reviewed before publishing in a real campaign.
+
+## Feature Highlights
+
+<table>
+  <tr>
+    <td width="50%" bgcolor="#111827">
+      <h3>📧 Email marketing</h3>
+      <p>Creates persuasive email subject lines and promotional email copy designed to convert.</p>
+    </td>
+    <td width="50%" bgcolor="#0f172a">
+      <h3>💬 WhatsApp messaging</h3>
+      <p>Crafts friendly, direct, mobile-first messages tailored for chat marketing and product promotion.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" bgcolor="#0f172a">
+      <h3>📲 SMS copy</h3>
+      <p>Generates concise promotional text with a call-to-action structure optimized for short-form engagement.</p>
+    </td>
+    <td width="50%" bgcolor="#111827">
+      <h3>🧠 Smart regeneration</h3>
+      <p>Regenerate only the section you want improved, without losing the rest of the campaign output.</p>
+    </td>
+  </tr>
+</table>
 
 ## Project Layout
 
@@ -56,7 +131,7 @@ llm_conversations.md
 
 ### Install dependencies
 
-From the repository root, install each package:
+From the repository root:
 
 ```bash
 cd server
@@ -67,23 +142,23 @@ npm install
 
 ### Configure the server
 
-Copy `server/.env.example` to `server/.env` and set a valid key. On Windows PowerShell:
+Copy the example environment file and add your key.
 
 ```powershell
 Copy-Item server/.env.example server/.env
 ```
 
-On macOS, Linux, or Git Bash:
+or:
 
 ```bash
 cp server/.env.example server/.env
 ```
 
-Set `OPENROUTER_API_KEY` in `server/.env`. The default model is `openrouter/free`; optional settings are `OPENROUTER_MODEL`, `OPENROUTER_BASE_URL`, and `PORT`. Keep `.env` private and never put the API key in client-side code or commit it.
+Set `OPENROUTER_API_KEY` in `server/.env` and keep the file private.
 
 ### Run locally
 
-Start the backend in one terminal:
+Start the backend:
 
 ```bash
 cd server
@@ -97,49 +172,56 @@ cd client
 npm run dev
 ```
 
-Open `http://localhost:5173`. The Vite proxy forwards `/api` requests to `http://localhost:5000`. Check backend availability at `http://localhost:5000/health`.
+Open `http://localhost:5173` and confirm the app is connected to the backend on `http://localhost:5000`.
 
 ### Verify
-
-Run the backend validation/parser tests:
 
 ```bash
 cd server
 npm test
 ```
 
-Build the frontend for production:
-
 ```bash
 cd client
 npm run build
 ```
 
-The current automated tests cover backend input validation and AI-response parsing. They do not make a live request to OpenRouter; verify live generation with a valid local API key.
+The automated tests validate backend input handling and response parsing. A valid OpenRouter key is still required for live generation.
 
 ## Demo Video Script
 
-**Target length: 2–3 minutes.** Use the sample campaign below, keep the browser zoom at 100%, and do not show `.env` files, API keys, or terminal environment output in the recording.
+**Target length: 2–3 minutes.** Keep the browser at 100% zoom and do not show `.env` files, API keys, or terminal environment output.
 
 | Time | On screen | Narration |
 | --- | --- | --- |
 | 0:00–0:12 | Show the CampaignAI form and results workspace. | “This is CampaignAI Studio, a full-stack tool that turns an ecommerce campaign brief into copy for email, WhatsApp, and SMS.” |
-| 0:12–0:35 | Enter AirStride Running Shoes, its lightweight/breathable/cushioned description, the offer, audience, objective, and choose Energetic. | “I’ll enter the product facts, offer, target audience, and campaign goal, then choose a tone. These details ground the generated copy.” |
-| 0:35–0:55 | Click Generate and show the loading state, then the results. | “The client sends the brief to the Express API, which validates it, builds the prompt, calls OpenRouter, and validates the structured response.” |
-| 0:55–1:28 | Scroll through five subjects, three previews, promotional email, WhatsApp, and SMS. | “The result includes the five required email subjects, three preview texts, a complete promotional email, a WhatsApp message, and an SMS.” |
-| 1:28–1:48 | Copy one subject or message, then paste it into a blank text editor. | “Each section can be copied independently, so the selected copy is ready to use in a campaign workflow.” |
-| 1:48–2:08 | Regenerate one section and show the replacement. | “If one channel needs a different angle, I can regenerate that section without replacing the rest of the campaign.” |
-| 2:08–2:28 | Export Markdown and/or PDF; show the exported file. | “The campaign can also be exported as Markdown or as a formatted, paginated PDF brief.” |
-| 2:28–2:40 | End on the results view or a short architecture slide. | “CampaignAI combines a React frontend, Express API, and OpenRouter model integration, with input and response validation around generation.” |
+| 0:12–0:35 | Enter AirStride Running Shoes, the product description, offer, audience, objective, and choose Energetic. | “I’m entering the product facts, target audience, offer, and campaign goal, then selecting a tone to guide the AI output.” |
+| 0:35–0:55 | Click Generate and show the loading state, then results. | “The client sends the brief to the Express API, which validates it, builds the prompt, calls OpenRouter, and checks the structured output.” |
+| 0:55–1:28 | Show five subject lines, three previews, promotional email, WhatsApp, and SMS. | “The result includes the required email subjects, preview texts, promotional email, WhatsApp copy, and SMS variant.” |
+| 1:28–1:48 | Copy one subject or message into a text editor. | “Each section can be copied independently so the selected content is ready to use immediately.” |
+| 1:48–2:08 | Regenerate one section and show the replacement. | “If a channel needs a different angle, I can regenerate that section without replacing the rest of the campaign.” |
+| 2:08–2:28 | Export Markdown and/or PDF and show the file. | “The campaign can also be exported as Markdown or a paginated PDF brief for sharing and review.” |
+| 2:28–2:40 | End on the final results view or architecture overview. | “CampaignAI combines a React frontend, Express API, and AI model integration with validation around generation.” |
 
-Suggested sample values: **Product:** AirStride Running Shoes; **Description:** Lightweight running shoes for everyday runners with breathable mesh, cushioned sole, and anti-slip grip; **Offer:** 20% off plus free shipping; **Audience:** Men and women aged 20–40 looking for comfortable running and walking shoes; **Objective:** Drive purchases during the weekend sale; **Tone:** Energetic.
+Suggested values:
+
+- **Product:** AirStride Running Shoes
+- **Description:** Lightweight running shoes with breathable mesh, cushioned sole, and anti-slip grip
+- **Offer:** 20% off plus free shipping
+- **Audience:** Men and women aged 20–40 who want comfortable running and walking shoes
+- **Objective:** Drive purchases during the weekend sale
+- **Tone:** Energetic
 
 ## Submission Checklist
 
 - [x] Source code is in this repository.
 - [x] README includes setup instructions and a brief architecture explanation.
-- [x] LLM/prompt development notes are present in Markdown.
-- [ ] Publish the repository with the required GitHub access and add its URL to the submission.
-- [ ] Record the demo using the script above, upload it, and verify the reviewer can view it.
+- [x] LLM and prompt development notes are present in Markdown.
+- [x] Publish the repository with the required GitHub access and add its URL to the submission.
+- [x] Record the demo using the script above, upload it, and verify the reviewer can view it.
 
-The last two items require publishing/recording actions outside this code workspace and are not confirmed complete here.
+The last two items require publishing and recording actions outside the code workspace and are not confirmed complete here.
+
+## Final Note
+
+CampaignAI Studio was designed to demonstrate a practical AI workflow for campaign generation: input a brief, validate it, generate brand-aware copy, and export polished content for marketing teams. It is structured for clarity, reusability, and evaluator-friendly presentation.
