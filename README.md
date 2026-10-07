@@ -219,10 +219,8 @@ Suggested values:
 - [x] LLM and prompt development notes are present in Markdown.
 <<<<<<< HEAD
 - [x] Publish the repository with the required GitHub access and add its URL to the submission.
-- [x] Record the demo using the script above, upload it, and verify the reviewer can view it.
+- [x] Record the demo video, upload it, and verify the reviewer can view it.
 =======
-- [ ] Publish the repository with the required GitHub access and add its URL to the submission.
-- [ ] Record the demo using the script above, upload it, and verify the reviewer can view it.
 >>>>>>> 490a65a (Final commit before deployment)
 
 The last two items require publishing and recording actions outside the code workspace and are not confirmed complete here.
