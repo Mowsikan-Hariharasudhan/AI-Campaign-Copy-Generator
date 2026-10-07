@@ -1,4 +1,6 @@
-const API_BASE = '/api/campaign';
+const DEFAULT_API_URL = 'https://ai-campaign-copy-generator-2.onrender.com';
+const rawApiUrl = import.meta.env.VITE_API_URL || DEFAULT_API_URL;
+const API_BASE = `${rawApiUrl.replace(/\/$/, '')}/api/campaign`;
 
 export async function generateCampaignApi(campaignData) {
   const response = await fetch(`${API_BASE}/generate`, {

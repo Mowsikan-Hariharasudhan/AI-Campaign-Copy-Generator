@@ -11,9 +11,23 @@ const app = express();
 app.use(helmet());
 
 // CORS configuration (allow Vite frontend dev and configurable origin)
-const clientOrigin = process.env.CLIENT_ORIGIN || 'http://localhost:5173';
+const defaultOrigins = [
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  'http://localhost:5174',
+  'http://127.0.0.1:5174',
+  'http://localhost:5175',
+  'http://127.0.0.1:5175',
+  'http://localhost:3000',
+  'http://127.0.0.1:3000'
+];
+const configuredOrigins = process.env.CLIENT_ORIGIN
+  ? process.env.CLIENT_ORIGIN.split(',').map(origin => origin.trim()).filter(Boolean)
+  : [];
+const allowedOrigins = process.env.CLIENT_ORIGIN === '*' ? '*' : [...new Set([...configuredOrigins, ...defaultOrigins])];
+
 app.use(cors({
-  origin: clientOrigin === '*' ? '*' : [clientOrigin, 'http://localhost:3000', 'http://127.0.0.1:5173'],
+  origin: allowedOrigins,
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
