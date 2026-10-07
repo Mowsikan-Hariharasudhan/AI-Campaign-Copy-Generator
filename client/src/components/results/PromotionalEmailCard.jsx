@@ -1,5 +1,5 @@
 import React from 'react';
-import { Send, FileText } from 'lucide-react';
+import { FileText, MailOpen } from 'lucide-react';
 import { CopyButton } from '../ui/CopyButton';
 import { RegenerateButton } from '../ui/RegenerateButton';
 
@@ -9,16 +9,18 @@ export function PromotionalEmailCard({ email, onRegenerate, isRegenerating }) {
   const fullEmailCopy = `Subject: ${email.subject}\n\n${email.body}`;
 
   return (
-    <div className="bg-white border border-neutral-200 rounded-md p-5 shadow-xs">
-      <div className="flex items-center justify-between pb-3 mb-3 border-b border-neutral-100">
-        <div className="flex items-center gap-2">
-          <FileText className="w-4 h-4 text-neutral-700" />
-          <h3 className="text-sm font-semibold text-neutral-900 tracking-tight">Full Promotional Email</h3>
-          <span className="text-[11px] font-medium bg-neutral-100 text-neutral-600 px-2 py-0.5 rounded">
-            Channel Copy
+    <section className="channel-panel email-panel p-5" aria-label="Promotional email preview">
+      <div className="channel-panel-heading flex flex-wrap items-center justify-between gap-3 pb-3 mb-4 border-b">
+        <div className="flex items-center gap-2.5">
+          <span className="w-9 h-9 rounded-md bg-[#fbf5df] text-[#9a7723] flex items-center justify-center">
+            <MailOpen className="w-4 h-4" />
           </span>
+          <div>
+            <p className="text-[9px] font-bold uppercase tracking-[0.16em] text-[#9a7723]">Email / 03</p>
+            <h3 className="section-title text-sm sm:text-base font-bold text-[#183a35] tracking-tight">Promotional email</h3>
+          </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <CopyButton text={fullEmailCopy} label="Copy Full Email" />
           <RegenerateButton
             onRegenerate={() => onRegenerate('promotionalEmail')}
@@ -28,25 +30,28 @@ export function PromotionalEmailCard({ email, onRegenerate, isRegenerating }) {
         </div>
       </div>
 
-      <div className="space-y-3">
-        {/* Email Header */}
-        <div className="p-2.5 rounded bg-neutral-50 border border-neutral-200/80">
-          <div className="flex items-center justify-between gap-2">
-            <span className="text-xs font-mono font-semibold text-neutral-500 uppercase tracking-wider">
-              Subject Line:
-            </span>
+      <div className="email-preview-window overflow-hidden">
+        <div className="email-preview-toolbar flex items-center justify-between gap-3 px-4 py-3">
+          <div className="flex items-center gap-3 min-w-0">
+            <span className="w-9 h-9 rounded-full bg-[#183a35] text-[#d7ee78] flex items-center justify-center text-[10px] font-bold shrink-0">CA</span>
+            <div className="min-w-0">
+              <p className="text-xs font-bold text-[#29463e]">CampaignAI <span className="font-normal text-[#829087]">&lt;hello@campaignai&gt;</span></p>
+              <p className="text-[10px] text-[#829087]">To: campaign audience</p>
+            </div>
+          </div>
+          <span className="text-[10px] text-[#829087] shrink-0">Email preview</span>
+        </div>
+        <div className="px-4 sm:px-6 pt-4 pb-3">
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-[9px] font-bold uppercase tracking-[0.16em] text-[#829087]">Subject</p>
             <CopyButton text={email.subject} label="Copy Subject" />
           </div>
-          <p className="text-xs sm:text-sm font-semibold text-neutral-900 mt-1">
-            {email.subject}
-          </p>
+          <p className="section-title text-base sm:text-lg font-semibold text-[#183a35] mt-1 break-words">{email.subject}</p>
         </div>
-
-        {/* Email Body */}
-        <div className="p-4 rounded border border-neutral-200 bg-white shadow-2xs font-sans text-xs sm:text-sm text-neutral-800 leading-relaxed whitespace-pre-wrap">
+        <div className="email-body-paper mx-3 sm:mx-5 mb-4 p-4 sm:p-6 border border-[#edf0e8] rounded-sm text-sm text-[#38564c] leading-7 whitespace-pre-wrap">
           {email.body}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

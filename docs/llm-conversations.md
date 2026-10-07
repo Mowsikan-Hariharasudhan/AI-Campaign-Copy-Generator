@@ -7,7 +7,7 @@ This document records the prompt engineering iterations and architecture convers
 ## LLM Used
 - **Provider**: OpenRouter
 - **Default Model**: `openrouter/free`
-- **Fallback / Production Models**: `meta-llama/llama-3.3-70b-instruct:free`, `mistralai/mistral-small-3`
+- **Configured fallback models**: `google/gemma-4-26b-a4b-it:free`, `google/gemma-4-31b-it:free`, `liquid/lfm-2.5-2.6b:free` (model availability depends on OpenRouter)
 - **Interface**: REST API `/chat/completions`
 
 ---

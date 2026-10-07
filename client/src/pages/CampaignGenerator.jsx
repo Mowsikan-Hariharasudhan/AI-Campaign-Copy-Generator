@@ -51,7 +51,7 @@ export function CampaignGenerator() {
 
           {/* Conditional Work Area */}
           {isLoading ? (
-            <LoadingState />
+            <LoadingState productName={formData.productName} />
           ) : generatedOutput ? (
             <ResultsPanel
               campaignData={formData}

@@ -4,8 +4,8 @@ import { TONES } from '../../constants/tones';
 export function ToneSelector({ selectedTone, onSelect, error, disabled = false }) {
   return (
     <div className="flex flex-col space-y-1.5">
-      <label className="text-xs font-semibold text-neutral-800 tracking-wide uppercase">
-        Tone of Voice <span className="text-rose-600">*</span>
+      <label className="text-[11px] font-bold text-[#38564c] tracking-wide uppercase">
+        Tone of Voice <span className="text-[#c74d38">*</span>
       </label>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -17,9 +17,9 @@ export function ToneSelector({ selectedTone, onSelect, error, disabled = false }
               type="button"
               disabled={disabled}
               onClick={() => onSelect(tone.id)}
-              className={`p-2.5 text-left rounded border transition-all cursor-pointer ${
+              className={`tone-option p-2.5 text-left rounded border transition-all cursor-pointer ${
                 isSelected
-                  ? 'border-neutral-900 bg-neutral-900 text-white shadow-xs'
+                  ? 'tone-option-selected border-neutral-900 bg-neutral-900 text-white shadow-xs'
                   : 'border-neutral-200 bg-white hover:border-neutral-400 text-neutral-800'
               } disabled:opacity-50 disabled:cursor-not-allowed`}
             >

@@ -19,16 +19,16 @@ export function CampaignForm({
   const [showPresetsMenu, setShowPresetsMenu] = useState(false);
 
   return (
-    <form onSubmit={onSubmit} className="bg-white border border-neutral-200/90 rounded-xl p-6 shadow-xs flex flex-col gap-5 transition-all">
-      <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-neutral-100">
+    <form onSubmit={onSubmit} className="campaign-form bg-white border border-neutral-200/90 rounded-xl p-6 shadow-xs flex flex-col gap-5 transition-all">
+      <div className="campaign-form-heading flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-neutral-100">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-sm sm:text-base font-bold text-neutral-900 tracking-tight">Campaign Parameters</h2>
-            <span className="text-[10px] font-mono font-medium px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200/60 uppercase">
-              Step 1
+            <h2 className="section-title text-base sm:text-lg font-bold text-[#183a35] tracking-tight">Campaign brief</h2>
+            <span className="text-[9px] font-bold px-1.5 py-1 rounded-sm bg-[#e4f2e7] text-[#315b48] uppercase tracking-wider">
+              Start here
             </span>
           </div>
-          <p className="text-xs text-neutral-500 mt-0.5">Define your product and objective to generate multi-channel marketing copy.</p>
+          <p className="text-xs text-[#718178] mt-1">The details behind every message.</p>
         </div>
 
         <div className="flex items-center gap-2 relative">
@@ -38,17 +38,17 @@ export function CampaignForm({
               type="button"
               onClick={() => setShowPresetsMenu(!showPresetsMenu)}
               disabled={isLoading}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-neutral-700 bg-neutral-100 hover:bg-neutral-200/80 active:bg-neutral-200 rounded-lg border border-neutral-200 transition-all cursor-pointer disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-[#315b48] bg-[#eaf3e9] hover:bg-[#dcebdd] active:bg-[#d3e5d4] rounded-md border border-[#d2e2d4] transition-all cursor-pointer disabled:opacity-50"
               title="Select sample campaign preset"
             >
-              <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+              <Sparkles className="w-3.5 h-3.5 text-[#c74d38]" />
               <span>Presets</span>
-              <ChevronDown className={`w-3 h-3 text-neutral-400 transition-transform ${showPresetsMenu ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`w-3 h-3 text-[#60766c] transition-transform ${showPresetsMenu ? 'rotate-180' : ''}`} />
             </button>
 
             {showPresetsMenu && (
               <div
-                className="absolute right-0 mt-1.5 w-64 bg-white border border-neutral-200 rounded-lg shadow-lg z-50 py-1.5 animate-in fade-in zoom-in-95 duration-100"
+                className="absolute right-0 mt-1.5 w-64 bg-white border border-[#d8e3d9] rounded-md shadow-lg z-50 py-1.5 animate-in fade-in zoom-in-95 duration-100"
                 onMouseLeave={() => setShowPresetsMenu(false)}
               >
                 <div className="px-3 py-1 text-[10px] font-mono uppercase text-neutral-400 tracking-wider">
@@ -84,7 +84,7 @@ export function CampaignForm({
             type="button"
             onClick={onReset}
             disabled={isLoading}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-colors cursor-pointer disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-[#718178] hover:text-[#183a35] hover:bg-[#f2f6f0] rounded-md transition-colors cursor-pointer disabled:opacity-50"
             title="Reset form"
           >
             <RotateCcw className="w-3.5 h-3.5" />

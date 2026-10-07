@@ -7,12 +7,12 @@ export function SubjectLineList({ subjects, onRegenerate, isRegenerating }) {
   if (!subjects || subjects.length === 0) return null;
 
   return (
-    <div className="bg-white border border-neutral-200 rounded-md p-5 shadow-xs">
-      <div className="flex items-center justify-between pb-3 mb-3 border-b border-neutral-100">
+    <section className="channel-panel subject-panel p-5" aria-label="Email subject line variations">
+      <div className="channel-panel-heading flex flex-wrap items-center justify-between gap-3 pb-3 mb-3 border-b">
         <div className="flex items-center gap-2">
-          <Mail className="w-4 h-4 text-neutral-700" />
-          <h3 className="text-sm font-semibold text-neutral-900 tracking-tight">Email Subject Lines</h3>
-          <span className="text-[11px] font-medium bg-neutral-100 text-neutral-600 px-2 py-0.5 rounded">
+          <Mail className="w-4 h-4 text-[#c74d38]" />
+          <h3 className="section-title text-sm sm:text-base font-bold text-[#183a35] tracking-tight">Email Subject Lines</h3>
+          <span className="text-[10px] font-bold uppercase tracking-wider bg-[#fff0e9] text-[#b54e39] px-2 py-1 rounded-sm">
             5 variations
           </span>
         </div>
@@ -23,17 +23,17 @@ export function SubjectLineList({ subjects, onRegenerate, isRegenerating }) {
         />
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2.5">
         {subjects.map((subject, idx) => (
           <div
             key={idx}
-            className="group flex items-center justify-between gap-3 p-2.5 rounded border border-neutral-150 bg-neutral-50/50 hover:bg-neutral-50 hover:border-neutral-300 transition-colors"
+            className="subject-row group flex items-center justify-between gap-3 p-3 rounded-md border"
           >
             <div className="flex items-start gap-2.5 min-w-0">
-              <span className="text-xs font-mono font-medium text-neutral-400 mt-0.5">
-                {idx + 1}.
+              <span className="w-7 h-7 rounded-sm bg-[#fff0e9] text-[#bc543d] flex items-center justify-center text-[11px] font-bold shrink-0">
+                {String(idx + 1).padStart(2, '0')}
               </span>
-              <p className="text-xs sm:text-sm text-neutral-800 font-medium break-words leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#29463e] font-semibold break-words leading-relaxed">
                 {subject}
               </p>
             </div>
@@ -43,6 +43,6 @@ export function SubjectLineList({ subjects, onRegenerate, isRegenerating }) {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

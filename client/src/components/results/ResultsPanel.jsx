@@ -4,7 +4,7 @@ import { PreviewTextList } from './PreviewTextList';
 import { PromotionalEmailCard } from './PromotionalEmailCard';
 import { WhatsAppCard } from './WhatsAppCard';
 import { SMSCard } from './SMSCard';
-import { Download, FileText, PlusCircle, CheckCircle2, Sparkles } from 'lucide-react';
+import { Download, FileText, PlusCircle, CheckCircle2 } from 'lucide-react';
 import { downloadMarkdown, downloadPDF } from '../../utils/exportUtils';
 
 export function ResultsPanel({
@@ -62,24 +62,24 @@ ${generatedOutput.smsMessage}
   };
 
   return (
-    <div className="space-y-4 animate-in fade-in duration-300">
+    <div className="space-y-5 animate-in fade-in duration-300">
       {/* Top Banner with Actions */}
-      <div className="flex flex-wrap items-center justify-between gap-3 p-4 bg-white border border-neutral-200/90 rounded-xl shadow-xs">
-        <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600">
-            <CheckCircle2 className="w-4 h-4" />
+      <div className="result-toolbar flex flex-wrap items-center justify-between gap-3 p-4 bg-white border border-neutral-200/90 rounded-lg shadow-xs">
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="w-10 h-10 rounded-md bg-[#e4f2e7] border border-[#d2e2d4] flex items-center justify-center text-[#27634d] shrink-0">
+            <CheckCircle2 className="w-5 h-5" />
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs sm:text-sm font-bold text-neutral-900">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-sm sm:text-base font-bold text-[#183a35] truncate max-w-full">
                 {campaignData.productName}
               </span>
-              <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-600 border border-neutral-200">
+              <span className="text-[10px] font-bold px-2 py-1 rounded-sm bg-[#fff0e9] text-[#b54e39] border border-[#f5d4c8] uppercase tracking-wider">
                 {campaignData.tone}
               </span>
             </div>
-            <p className="text-[11px] text-neutral-500 hidden sm:block">
-              5 channels generated & ready for deployment
+            <p className="text-[11px] text-[#718178] mt-0.5 hidden sm:block">
+              Campaign copy overview
             </p>
           </div>
         </div>
@@ -89,10 +89,10 @@ ${generatedOutput.smsMessage}
           <button
             type="button"
             onClick={handleExportPDF}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-rose-700 bg-rose-50/70 hover:bg-rose-100/80 rounded-lg border border-rose-200/70 transition-all cursor-pointer active:scale-95"
+            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-[#b54e39] bg-[#fff0e9] hover:bg-[#ffe4d9] rounded-md border border-[#f2d0c3] transition-all cursor-pointer active:scale-95"
             title="Download formatted PDF campaign summary"
           >
-            <FileText className="w-3.5 h-3.5 text-rose-600" />
+            <FileText className="w-3.5 h-3.5" />
             <span>Export PDF</span>
           </button>
 
@@ -100,10 +100,10 @@ ${generatedOutput.smsMessage}
           <button
             type="button"
             onClick={handleExportMarkdown}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-neutral-700 bg-neutral-100 hover:bg-neutral-200/80 rounded-lg border border-neutral-250 transition-all cursor-pointer active:scale-95"
+            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-[#315b48] bg-[#eaf3e9] hover:bg-[#dcebdd] rounded-md border border-[#d2e2d4] transition-all cursor-pointer active:scale-95"
             title="Download raw Markdown file"
           >
-            <Download className="w-3.5 h-3.5 text-neutral-600" />
+            <Download className="w-3.5 h-3.5" />
             <span>Export MD</span>
           </button>
 
@@ -111,9 +111,9 @@ ${generatedOutput.smsMessage}
           <button
             type="button"
             onClick={onNewCampaign}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-neutral-900 bg-white hover:bg-neutral-50 rounded-lg border border-neutral-300 transition-all cursor-pointer active:scale-95 shadow-2xs"
+            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-[#183a35] bg-white hover:bg-[#f5faf4] rounded-md border border-[#cad9ce] transition-all cursor-pointer active:scale-95 shadow-2xs"
           >
-            <PlusCircle className="w-3.5 h-3.5 text-neutral-700" />
+            <PlusCircle className="w-3.5 h-3.5 text-[#ed7357]" />
             <span>New Campaign</span>
           </button>
         </div>
